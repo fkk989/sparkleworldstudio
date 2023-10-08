@@ -12,7 +12,7 @@ export default function Projects() {
   const handleFetchProjects = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:3000/api/projects/getprojects"
+        "https://sparkleworldstudio.vercel.app/api/projects/getprojects"
       );
 
       const resData = res.data.projects;

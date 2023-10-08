@@ -34,7 +34,7 @@ export default function AddProject() {
       const file: File | null | undefined = input.files?.item(0);
 
       if (!file) return;
-      // http://localhost:3000/api/
+
       const res = await fetch(
         "https://sparkleworldstudio.vercel.app/api/getsignedurl",
         {
@@ -78,7 +78,7 @@ export default function AddProject() {
     try {
       toast.loading("adding project", { id: "adding-project" });
       const res = await fetch(
-        `http://localhost:3000/api/projects/addprojects`,
+        `https://sparkleworldstudio.vercel.app/api/projects/addprojects`,
         {
           method: "POST",
           body: JSON.stringify(body),
