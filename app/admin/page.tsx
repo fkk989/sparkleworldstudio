@@ -27,10 +27,13 @@ export default function Admin() {
       id: "login",
     });
 
-    const res = await fetch("http://localhost:3000/api/admin/login", {
-      method: "POST",
-      body: JSON.stringify(body),
-    });
+    const res = await fetch(
+      "https://sparkleworldstudio.vercel.app/api/admin/login",
+      {
+        method: "POST",
+        body: JSON.stringify(body),
+      }
+    );
 
     const data = await res.json();
 

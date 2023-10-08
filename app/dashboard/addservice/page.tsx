@@ -20,7 +20,7 @@ export default function AddAdmin() {
     try {
       toast.loading("adding services", { id: "adding-services" });
       const res = await fetch(
-        "http://localhost:3000/api/services/addservices",
+        "https://sparkleworldstudio.vercel.app/api/services/addservices",
         {
           method: "POST",
           body: JSON.stringify(body),

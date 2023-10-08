@@ -21,10 +21,13 @@ export default function AddAdmin() {
     try {
       toast.loading("Creating Admin", { id: "creating-admin" });
 
-      const res = await fetch("http://localhost:3000/api/admin/addadmin", {
-        method: "POST",
-        body: JSON.stringify(body),
-      });
+      const res = await fetch(
+        "https://sparkleworldstudio.vercel.app/api/admin/addadmin",
+        {
+          method: "POST",
+          body: JSON.stringify(body),
+        }
+      );
 
       const data = await res.json();
 

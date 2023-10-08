@@ -35,12 +35,15 @@ export default function AddProject() {
 
       if (!file) return;
       // http://localhost:3000/api/
-      const res = await fetch("http://localhost:3000/api/getsignedurl", {
-        method: "POST",
-        body: JSON.stringify({
-          imageType: `${file?.type.split("/")[1]}`,
-        }),
-      });
+      const res = await fetch(
+        "https://sparkleworldstudio.vercel.app/api/getsignedurl",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            imageType: `${file?.type.split("/")[1]}`,
+          }),
+        }
+      );
       const data = await res.json();
       if (!data.success) return;
 

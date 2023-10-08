@@ -39,7 +39,9 @@ export const Navigation = () => {
   // if token fetched user
   const fetchedUser = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/getAdmin");
+      const res = await axios.get(
+        "https://sparkleworldstudio.vercel.app/api/getAdmin"
+      );
       if (res.statusText === "OK") {
         setIsAdmin({ isAdmin: true });
       }
