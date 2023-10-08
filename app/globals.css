@@ -2,26 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: white;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+* {
+  overscroll-behavior: none;
+}
+
+.digonals-lines {
+  background-color: #ffffff;
+  background-size: 10px 10px;
+  background-image: repeating-linear-gradient(
+    45deg,
+    #dbdcf1 0,
+    #dbdcf1 1px,
+    #ffffff 0,
+    #ffffff 50%
+  );
+}
+.textured-bg {
+  background-color: #ffffff;
+  opacity: 1;
+  background: radial-gradient(
+      circle,
+      transparent 20%,
+      #ffffff 20%,
+      #ffffff 80%,
+      transparent 80%,
+      transparent
+    ),
+    radial-gradient(
+        circle,
+        transparent 20%,
+        #ffffff 20%,
+        #ffffff 80%,
+        transparent 80%,
+        transparent
+      )
+      25px 25px,
+    linear-gradient(#e5e6f1 2px, transparent 2px) 0 -1px,
+    linear-gradient(90deg, #e5e6f1 2px, #ffffff 2px) -1px 0;
+  background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;
 }
