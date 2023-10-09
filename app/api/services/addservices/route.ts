@@ -14,10 +14,10 @@ const serviceInput = z.object({
 });
 
 export async function POST(req: NextRequest) {
-  const reqBody = await req.json();
-  const cookie = cookies();
-
   try {
+    const reqBody = await req.json();
+
+    const cookie = cookies();
     const token = cookie.get("sparkle-admin-token");
     const verifiedToken = token && (await JWT.verify(token.value, JWT_SECRET));
 
@@ -48,6 +48,17 @@ export async function POST(req: NextRequest) {
 
     // fetching data from parsedInput
     const { title, info, imageUrl } = parsedInput.data;
+
+    if (title.length === 0 || info.length === 0) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "title and info are important",
+          serviceData: null,
+        },
+        { status: 422 }
+      );
+    }
 
     const service = await prismaClient.services.create({
       data: {

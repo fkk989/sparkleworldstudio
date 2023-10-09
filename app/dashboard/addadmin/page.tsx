@@ -1,4 +1,5 @@
 "use client";
+import { useAddAdmin } from "@/hooks";
 import { Admin } from "@/store";
 import axios from "axios";
 import { useState } from "react";
@@ -17,30 +18,7 @@ export default function AddAdmin() {
     name,
     password,
   };
-  const handleAddAdmin = async () => {
-    try {
-      toast.loading("Creating Admin", { id: "creating-admin" });
-
-      const res = await fetch(
-        "https://sparkleworldstudio.vercel.app/api/admin/addadmin",
-        {
-          method: "POST",
-          body: JSON.stringify(body),
-        }
-      );
-
-      const data = await res.json();
-
-      // if login failed
-      if (!data.success) {
-        toast.error(data.message, { id: "creating-admin" });
-      }
-      // if login success
-      toast.success(data.message, { id: "creating-admin" });
-    } catch (error) {
-      toast.error("error while creating", { id: "creating-admin" });
-    }
-  };
+  const { mutate, admin } = useAddAdmin();
 
   return (
     <div className="w-screen h-screen flex justify-center items-center">
@@ -56,6 +34,7 @@ export default function AddAdmin() {
           {/* email */}
           <input
             onChange={(e) => {
+              e.preventDefault();
               setEmail(e.target.value);
             }}
             type="text"
@@ -65,6 +44,7 @@ export default function AddAdmin() {
           {/* name */}
           <input
             onChange={(e) => {
+              e.preventDefault();
               setName(e.target.value);
             }}
             type="text"
@@ -74,6 +54,7 @@ export default function AddAdmin() {
           {/* password */}
           <input
             onChange={(e) => {
+              e.preventDefault();
               setPassword(e.target.value);
             }}
             type="text"
@@ -84,7 +65,7 @@ export default function AddAdmin() {
           {/* submit button */}
           <div
             onClick={() => {
-              handleAddAdmin();
+              mutate(body);
             }}
             className="w-[100%] flex justify-end items-center mobile:w-[90%]"
           >

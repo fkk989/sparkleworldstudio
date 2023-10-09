@@ -1,12 +1,14 @@
 "use client";
+import { useAddService, useUploadToAws } from "@/hooks";
 import { Services } from "@/store";
-import { useState } from "react";
+import { PhotoIcon } from "@heroicons/react/24/solid";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 // imput style
 const inputStyle = `w-[100%] h-[50px] outline-none bg-transparent border-b border-[#23252d] placeholder:text-[#23252d] mobile:w-[90%]`;
 
-export default function AddAdmin() {
+export default function AddService() {
   const [title, setTitle] = useState("");
   const [info, setInfo] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -16,26 +18,25 @@ export default function AddAdmin() {
     info,
     imageUrl,
   };
-  const hanldeAddService = async () => {
-    try {
-      toast.loading("adding services", { id: "adding-services" });
-      const res = await fetch(
-        "https://sparkleworldstudio.vercel.app/api/services/addservices",
-        {
-          method: "POST",
-          body: JSON.stringify(body),
-        }
-      );
 
-      const data = await res.json();
-
-      if (!data.success) {
-        return toast.error(data.message, { id: "adding-services" });
-      }
-      toast.success("added successfully", { id: "adding-services" });
-    } catch (error) {
-      toast.error("error adding services", { id: "adding-services" });
+  const { mutate, data, isSuccess } = useUploadToAws();
+  const { mutation, serviceData } = useAddService();
+  useEffect(() => {
+    if (isSuccess) {
+      const url = new URL(data.url);
+      const imagePath = `${url.origin}${url.pathname}`;
+      setImageUrl(imagePath);
     }
+  }, [isSuccess]);
+
+  const handleImgInput = async () => {
+    const imgInput = document.createElement("input");
+    imgInput.setAttribute("type", "file"),
+      imgInput.setAttribute("accept", "image/*");
+    imgInput.addEventListener("change", () => {
+      mutate(imgInput);
+    });
+    imgInput.click();
   };
 
   return (
@@ -68,19 +69,19 @@ export default function AddAdmin() {
             className={`${inputStyle}`}
           />
           {/* imageUrl */}
-          <input
-            onChange={(e) => {
-              setImageUrl(e.target.value);
+          {/* image input */}
+          <button
+            onClick={() => {
+              handleImgInput();
             }}
-            type="text"
-            placeholder="Image"
-            className={`${inputStyle}`}
-          />
+          >
+            <PhotoIcon className="w-[30px] h-[30px] text-slate-400 hover:text-slate-800" />
+          </button>
 
           {/* submit button */}
           <div
             onClick={() => {
-              hanldeAddService();
+              mutation.mutate(body);
             }}
             className="w-[100%] flex justify-end items-center mobile:w-[90%]"
           >

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Navigation, Provider, Loader } from "@/components";
 import { Toaster } from "react-hot-toast";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -41,6 +42,7 @@ export default function RootLayout({
             {children}
           </main>
           <Toaster position="top-right" reverseOrder={false} />
+          <ReactQueryDevtools />
         </body>
       </Provider>
     </html>

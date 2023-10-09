@@ -1,9 +1,11 @@
 "use client";
 import { Project } from "@/store";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
+import { useAddAdmin, useAddProject, useUploadToAws } from "@/hooks";
+
 // imput style
 const inputStyle = `w-[100%] h-[50px] outline-none bg-transparent border-b border-[#23252d] placeholder:text-[#23252d] mobile:w-[90%]`;
 
@@ -26,75 +28,25 @@ export default function AddProject() {
     imageUrl,
   };
 
-  const handleInputChange = async (input: HTMLInputElement) => {
-    return async (e: Event) => {
-      toast.loading("uploading image", { id: "uploading-image" });
-      e.preventDefault();
+  const { mutate, data, isSuccess } = useUploadToAws();
+  const { mutation, projectData } = useAddProject();
 
-      const file: File | null | undefined = input.files?.item(0);
-
-      if (!file) return;
-
-      const res = await fetch(
-        "https://sparkleworldstudio.vercel.app/api/getsignedurl",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            imageType: `${file?.type.split("/")[1]}`,
-          }),
-        }
-      );
-      const data = await res.json();
-      if (!data.success) return;
-
+  useEffect(() => {
+    if (isSuccess) {
       const url = new URL(data.url);
-
-      // uploading photo to aws
-      const awsRes = await axios.put(data.url, file, {
-        headers: {
-          "Content-Type": file.type,
-        },
-      });
-
-      if (awsRes.statusText == "OK") {
-        toast.success("uploaded successfully", { id: "uploading-image" });
-      }
-
-      const imgUrl = `${url.origin}${url.pathname}`;
-      setImageUrl(imgUrl);
-    };
-  };
+      const imagePath = `${url.origin}${url.pathname}`;
+      setImageUrl(imagePath);
+    }
+  }, [isSuccess]);
 
   const handleImgInput = async () => {
     const imgInput = document.createElement("input");
     imgInput.setAttribute("type", "file"),
       imgInput.setAttribute("accept", "image/*");
-    const hadlerFn = await handleInputChange(imgInput);
-    imgInput.addEventListener("change", hadlerFn);
+    imgInput.addEventListener("change", () => {
+      mutate(imgInput);
+    });
     imgInput.click();
-  };
-
-  const handleAddProject = async () => {
-    try {
-      toast.loading("adding project", { id: "adding-project" });
-      const res = await fetch(
-        `https://sparkleworldstudio.vercel.app/api/projects/addprojects`,
-        {
-          method: "POST",
-          body: JSON.stringify(body),
-        }
-      );
-
-      const data = await res.json();
-
-      if (!data.success) {
-        return toast.error("error", { id: "adding-project" });
-      }
-
-      toast.success("added successfully", { id: "adding-project" });
-    } catch (e: any) {
-      return toast.error(e.message, { id: "adding-project" });
-    }
   };
 
   return (
@@ -174,7 +126,7 @@ export default function AddProject() {
           {/* submit button */}
           <div
             onClick={() => {
-              handleAddProject();
+              mutation.mutate(body);
             }}
             className="w-[100%] flex justify-end items-center mobile:w-[90%]"
           >

@@ -54,6 +54,17 @@ export async function POST(req: NextRequest) {
     const { title, clientName, info, landArea, budget, architect, imageUrl } =
       parsedInput.data;
 
+    if (title.length === 0 || clientName.length === 0) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "title and client name are important!",
+          projectData: null,
+        },
+        { status: 422 }
+      );
+    }
+
     const project = await prismaClient.project.create({
       data: {
         title,

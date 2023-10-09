@@ -1,35 +1,17 @@
 "use client";
 import { ProjectCard } from "@/components";
+import { useGetProjects } from "@/hooks/project";
 import { ProjectCardProps, handleDropdwon } from "@/store";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-
+// ://sparkleworldstudio.vercel.app
 export default function Projects() {
-  const [data, setData] = useState<ProjectCardProps[]>([]);
   const navigate = useRouter();
-  const handleFetchProjects = async () => {
-    try {
-      const res = await axios.get(
-        "https://sparkleworldstudio.vercel.app/api/projects/getprojects"
-      );
 
-      const resData = res.data.projects;
-      console.log(resData);
-      setData(resData);
-      setTimeout(() => {
-        console.log(data);
-      }, 2000);
-    } catch (e: any) {
-      return toast.error(e.message);
-    }
-  };
+  const { projectData } = useGetProjects();
 
-  useEffect(() => {
-    handleFetchProjects();
-    console.log(data);
-  }, []);
   return (
     <div className="flex flex-col">
       {/* top image container */}
@@ -49,22 +31,24 @@ export default function Projects() {
       {/* projects card container */}
       <div className=" grid grid-cols-12 gap-[20px] justify-items-center  mt-[5vh] bg-white z-[5] pt-[30px]">
         {/* project card */}
-        {data.map((projectData) => {
-          return (
-            <div
-              className=" col-span-12 mobile:col-span-3"
-              onClick={() => {
-                navigate.push(`/projects/${projectData.id}`);
-              }}
-            >
-              <ProjectCard
-                imageUrl={`${projectData.imageUrl}`}
-                title={`${projectData.title}`}
-                info={`${projectData.info}`}
-              />
-            </div>
-          );
-        })}
+        {projectData &&
+          projectData.projects.map((projectData: ProjectCardProps) => {
+            return (
+              <div
+                key={projectData.id}
+                className=" col-span-12 mobile:col-span-3"
+                onClick={() => {
+                  navigate.push(`/projects/${projectData.id}`);
+                }}
+              >
+                <ProjectCard
+                  imageUrl={`${projectData.imageUrl}`}
+                  title={`${projectData.title}`}
+                  info={`${projectData.info}`}
+                />
+              </div>
+            );
+          })}
       </div>
     </div>
   );

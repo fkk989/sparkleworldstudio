@@ -10,14 +10,13 @@ import { isAdmin } from "@/store";
 import { useRecoilState } from "recoil";
 import { DashboardDropDown } from "./dashboard";
 import axios from "axios";
+import { useGetAdmin } from "@/hooks";
 
 // list style
 const className =
   "text-[18px] capitalize font-[700] cursor-pointer hover:text-gray-400";
 
 export const Navigation = () => {
-  const [is_admin, setIsAdmin] = useRecoilState(isAdmin);
-
   const navigation = useRouter();
   const pathName = usePathname();
   const params = useParams();
@@ -36,24 +35,10 @@ export const Navigation = () => {
     links.current.push(element);
   }
 
-  // if token fetched user
-  const fetchedUser = async () => {
-    try {
-      const res = await axios.get(
-        "https://sparkleworldstudio.vercel.app/api/getAdmin"
-      );
-      console.log(res.statusText);
-      if (res.statusText === "OK") {
-        setIsAdmin({ isAdmin: true });
-      }
-    } catch (error) {}
-  };
+  // fetching  admin
+  const { admin } = useGetAdmin();
 
   useEffect(() => {
-    fetchedUser();
-    //changing navbar color on scrolling 80px from top
-
-    // closing nav in mobile on click on links
     links.current!.map((elem) => {
       elem.addEventListener("click", () => {
         if (window.innerWidth < 500) {
@@ -88,6 +73,7 @@ export const Navigation = () => {
         adminLink.current!
       );
     });
+
     return () => ctx.revert(); // <-- CLEANUP!
   }, []);
 
@@ -202,7 +188,7 @@ export const Navigation = () => {
           >
             contact us
           </li>
-          {is_admin.isAdmin ? (
+          {admin ? (
             <li
               ref={adminLink}
               className={`${className} ${

@@ -1,10 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { isAdmin } from "@/store";
 import { useSetRecoilState } from "recoil";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import axios from "axios";
+import { useAdminLogin } from "@/hooks";
 
 // imput style
 const inputStyle = `w-[100%] h-[50px] outline-none bg-transparent border-b border-[#23252d] placeholder:text-[#23252d] mobile:w-[90%]`;
@@ -20,39 +20,24 @@ export default function Admin() {
     password,
   };
 
-  // const { admin, refetch } = useAdminLogin(email, password);
+  const { refetch, error, isError, isSuccess, data } = useAdminLogin(body);
 
-  const handelLogin = async () => {
-    toast.loading("loginin...", {
-      id: "login",
-    });
-
-    const res = await fetch(
-      "https://sparkleworldstudio.vercel.app/api/admin/login",
-      {
-        method: "POST",
-        body: JSON.stringify(body),
-      }
-    );
-
-    const data = await res.json();
-
-    // if login failed
-    if (!data.success) {
-      toast.error(data.message, {
-        id: "login",
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("successfully loged in", {
+        id: "admin-login",
       });
-      return;
+      setAdmin({ isAdmin: true });
+      navigate.push("/dashboard/addadmin");
     }
 
-    // if login success
-    setAdmin({ isAdmin: true });
-    navigate.push("/dashboard/addadmin");
-    toast.success("loginin success", {
-      id: "login",
-    });
-  };
-
+    if (isError) {
+      // @ts-ignore
+      toast.error(error.response.data.message, {
+        id: "admin-login",
+      });
+    }
+  });
   return (
     <div className="w-screen h-screen flex justify-center items-center">
       {/* contact Form started*/}
@@ -84,8 +69,7 @@ export default function Admin() {
           {/* submit button */}
           <div
             onClick={() => {
-              handelLogin();
-              // refetch();
+              refetch();
             }}
             className="w-[100%] flex justify-end items-center mobile:w-[90%]"
           >
