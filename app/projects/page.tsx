@@ -1,17 +1,20 @@
 "use client";
 import { ProjectCard } from "@/components";
 import { useGetProjects } from "@/hooks/project";
-import { ProjectCardProps, handleDropdwon } from "@/store";
-import axios from "axios";
+import { ProjectCardProps } from "@/store";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import { useEffect } from "react";
+
 // ://sparkleworldstudio.vercel.app
 export default function Projects() {
   const navigate = useRouter();
 
-  const { projectData } = useGetProjects();
-
+  const { projectData, isSuccess } = useGetProjects();
+  useEffect(() => {
+    if (isSuccess) {
+      console.log(projectData.projects);
+    }
+  }, [isSuccess]);
   return (
     <div className="flex flex-col">
       {/* top image container */}

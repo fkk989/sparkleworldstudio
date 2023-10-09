@@ -1,9 +1,6 @@
-import { ProjectCardProps } from "@/store";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { Dispatch, SetStateAction } from "react";
 import toast from "react-hot-toast";
-import { date } from "zod";
 
 export const useGetProjects = () => {
   const query = useQuery({
