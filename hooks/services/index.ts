@@ -8,7 +8,7 @@ export const useAddService = () => {
     mutationFn: async (body: object) => {
       toast.loading("creating service", { id: "adding-service" });
       const { data } = await axios.post(
-        "http://localhost:3000/api/services/addservices",
+        "https://sparkleworldstudio.vercel.app/api/services/addservices",
         body
       );
 

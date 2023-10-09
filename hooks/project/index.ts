@@ -10,7 +10,7 @@ export const useGetProjects = () => {
     queryKey: ["get-projects"],
     queryFn: async () => {
       const { data } = await axios.get(
-        "http://localhost:3000/api/projects/getprojects"
+        "https://sparkleworldstudio.vercel.app/api/projects/getprojects"
       );
 
       return data;
@@ -28,7 +28,7 @@ export const useAddProject = () => {
       toast.loading("adding project", { id: "adding-project" });
 
       const { data } = await axios.post(
-        "http://localhost:3000/api/projects/addprojects",
+        "https://sparkleworldstudio.vercel.app/api/projects/addprojects",
         body
       );
       return data;
@@ -57,7 +57,7 @@ export const useUploadToAws = () => {
       }
 
       const { data } = await axios.post(
-        "http://localhost:3000/api/getsignedurl",
+        "https://sparkleworldstudio.vercel.app/api/getsignedurl",
         {
           imageType: `${file?.type.split("/")[1]}`,
         }
@@ -83,55 +83,3 @@ export const useUploadToAws = () => {
   });
   return { ...mutation, data: mutation.data };
 };
-
-/*
-
-
-
- const handleInputChange = async (input: HTMLInputElement) => {
-    return async (e: Event) => {
-      toast.loading("uploading image", { id: "uploading-image" });
-      e.preventDefault();
-
-      const file: File | null | undefined = input.files?.item(0);
-
-      if (!file) return;
-
-      const res = await fetch("http://localhost:3000/api/getsignedurl", {
-        method: "POST",
-        body: JSON.stringify({
-          imageType: `${file?.type.split("/")[1]}`,
-        }),
-      });
-      const data = await res.json();
-      if (!data.success) return;
-
-      const url = new URL(data.url);
-
-      // uploading photo to aws
-      const awsRes = await axios.put(data.url, file, {
-        headers: {
-          "Content-Type": file.type,
-        },
-      });
-
-      if (awsRes.statusText == "OK") {
-        toast.success("uploaded successfully", { id: "uploading-image" });
-      }
-
-      const imgUrl = `${url.origin}${url.pathname}`;
-      setImageUrl(imgUrl);
-    };
-  };
-
-  const handleImgInput = async () => {
-    const imgInput = document.createElement("input");
-    imgInput.setAttribute("type", "file"),
-      imgInput.setAttribute("accept", "image/*");
-    const hadlerFn = await handleInputChange(imgInput);
-    imgInput.addEventListener("change", hadlerFn);
-    imgInput.click();
-  };
-
-  
-*/

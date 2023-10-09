@@ -11,7 +11,10 @@ export const useAdminLogin = (body: object) => {
         id: "admin-login",
       });
       const data = (
-        await axios.post("http://localhost:3000/api/admin/login", body)
+        await axios.post(
+          "https://sparkleworldstudio.vercel.app/api/admin/login",
+          body
+        )
       ).data;
       return data;
     },
@@ -26,7 +29,9 @@ export const useGetAdmin = () => {
   const query = useQuery({
     queryKey: ["get-admin"],
     queryFn: async () => {
-      const { data } = await axios.get("http://localhost:3000/api/getAdmin");
+      const { data } = await axios.get(
+        "https://sparkleworldstudio.vercel.app/api/getAdmin"
+      );
       return data;
     },
   });
@@ -41,7 +46,7 @@ export const useAddAdmin = () => {
     mutationFn: async (body: object) => {
       toast.loading("Creating Admin", { id: "creating-admin" });
       const data = await axios.post(
-        "http://localhost:3000/api/admin/addadmin",
+        "https://sparkleworldstudio.vercel.app/api/admin/addadmin",
         body
       );
       return data;
