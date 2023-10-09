@@ -12,7 +12,9 @@ export const Provider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const defaultAdmin = async () => {
     const res = (
-      await axios.get("http://localhost:3000/api/admin/defaultadmin")
+      await axios.get(
+        "https://sparkleworldstudio.vercel.app//api/admin/defaultadmin"
+      )
     ).data;
   };
   useEffect(() => {
