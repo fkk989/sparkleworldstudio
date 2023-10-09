@@ -42,6 +42,7 @@ export const Navigation = () => {
       const res = await axios.get(
         "https://sparkleworldstudio.vercel.app/api/getAdmin"
       );
+      console.log(res.statusText);
       if (res.statusText === "OK") {
         setIsAdmin({ isAdmin: true });
       }
