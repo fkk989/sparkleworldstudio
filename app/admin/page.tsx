@@ -19,7 +19,7 @@ export default function Admin() {
     email,
     password,
   };
-
+  // fetching  admin
   const { refetch, error, isError, isSuccess, data } = useAdminLogin(body);
 
   useEffect(() => {

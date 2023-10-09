@@ -7,7 +7,7 @@ import { gsap } from "gsap";
 import { closeNavbar, headerAnimation, openNavbar } from "@/store";
 import { DropDown } from "./constructionRates";
 import { isAdmin } from "@/store";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { DashboardDropDown } from "./dashboard";
 import axios from "axios";
 import { useGetAdmin } from "@/hooks";
@@ -35,6 +35,7 @@ export const Navigation = () => {
     links.current.push(element);
   }
 
+  const isadmin = useRecoilValue(isAdmin);
   // fetching  admin
   const { admin } = useGetAdmin();
 
@@ -188,7 +189,7 @@ export const Navigation = () => {
           >
             contact us
           </li>
-          {admin ? (
+          {admin || isadmin.isAdmin ? (
             <li
               ref={adminLink}
               className={`${className} ${
