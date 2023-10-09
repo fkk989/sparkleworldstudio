@@ -1,5 +1,5 @@
 "use client";
-export const dynamic = "force-dynamic";
+
 import { ProjectCard } from "@/components";
 import { useGetProjects } from "@/hooks/project";
 import { ProjectCardProps } from "@/store";

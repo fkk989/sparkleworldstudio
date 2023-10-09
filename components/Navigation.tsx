@@ -7,9 +7,8 @@ import { gsap } from "gsap";
 import { closeNavbar, headerAnimation, openNavbar } from "@/store";
 import { DropDown } from "./constructionRates";
 import { isAdmin } from "@/store";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { DashboardDropDown } from "./dashboard";
-import axios from "axios";
 import { useGetAdmin } from "@/hooks";
 
 // list style
