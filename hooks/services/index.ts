@@ -32,7 +32,7 @@ export const useGetServices = () => {
     queryKey: ["get-services"],
     queryFn: async () => {
       const { data } = await axios.get(
-        "http://localhost:3000/api/services/getservices"
+        "https://sparkleworldstudio.vercel.app/api/services/getservices"
       );
       return data;
     },
