@@ -7,8 +7,7 @@ export const useGetProjects = () => {
     queryKey: ["get-projects"],
     queryFn: async () => {
       const { data } = await axios.get(
-        "https://sparkleworldstudio.vercel.app/api/projects/getprojects",
-        {}
+        "https://sparkleworldstudio.vercel.app/api/projects/getprojects"
       );
 
       return data;
