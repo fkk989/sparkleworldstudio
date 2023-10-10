@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
+  experimental: {
+    // Defaults to 50MB
+    isrMemoryCacheSize: 0, // cache size in bytes
+  },
   images: {
     domains: [
       "sparkel-world-studio.s3.ap-south-1.amazonaws.com",
