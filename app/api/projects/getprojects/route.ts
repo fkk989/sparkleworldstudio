@@ -1,9 +1,7 @@
 import { prismaClient } from "@/client";
 import { NextResponse } from "next/server";
-import { headers } from "next/headers";
+
 export async function GET() {
-  const header = headers();
-  header.set("cache-control", "no-store");
   try {
     const projects = await prismaClient.project.findMany({
       orderBy: { createdAt: "desc" },
