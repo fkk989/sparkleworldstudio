@@ -8,9 +8,6 @@ body {
 *::-webkit-scrollbar {
   display: none;
 }
-* {
-  overscroll-behavior: none;
-}
 
 .digonals-lines {
   background-color: #ffffff;

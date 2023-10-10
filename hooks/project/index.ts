@@ -1,14 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
-
+import { baseUrl } from "@/store";
 export const useGetProjects = () => {
   const query = useQuery({
     queryKey: ["get-projects"],
     queryFn: async () => {
-      const { data } = await axios.get(
-        "https://sparkleworldstudio.vercel.app/api/projects/getprojects"
-      );
+      const { data } = await axios.get(`${baseUrl}/projects/getprojects`);
 
       return data;
     },
@@ -53,12 +51,9 @@ export const useUploadToAws = () => {
         return toast.error("please select a image", { id: "uploading-image" });
       }
 
-      const { data } = await axios.post(
-        "https://sparkleworldstudio.vercel.app/api/getsignedurl",
-        {
-          imageType: `${file?.type.split("/")[1]}`,
-        }
-      );
+      const { data } = await axios.post(`${baseUrl}/getsignedurl`, {
+        imageType: `${file?.type.split("/")[1]}`,
+      });
       return data;
     },
     onSuccess: async (data, input) => {

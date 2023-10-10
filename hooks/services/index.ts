@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { baseUrl } from "@/store";
 
 export const useAddService = () => {
   const mutation = useMutation({
@@ -8,7 +9,7 @@ export const useAddService = () => {
     mutationFn: async (body: object) => {
       toast.loading("creating service", { id: "adding-service" });
       const { data } = await axios.post(
-        "https://sparkleworldstudio.vercel.app/api/services/addservices",
+        `${baseUrl}/services/addservices`,
         body
       );
 
@@ -31,9 +32,7 @@ export const useGetServices = () => {
   const query = useQuery({
     queryKey: ["get-services"],
     queryFn: async () => {
-      const { data } = await axios.get(
-        "https://sparkleworldstudio.vercel.app/api/services/getservices"
-      );
+      const { data } = await axios.get(`${baseUrl}/services/getservices`);
       return data;
     },
   });

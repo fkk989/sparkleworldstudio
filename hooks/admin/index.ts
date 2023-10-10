@@ -1,6 +1,7 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import axios from "axios";
+import { baseUrl } from "@/store";
 
 // admion login query
 export const useAdminLogin = (body: object) => {
@@ -10,12 +11,7 @@ export const useAdminLogin = (body: object) => {
       toast.loading("login in", {
         id: "admin-login",
       });
-      const data = (
-        await axios.post(
-          "https://sparkleworldstudio.vercel.app/api/admin/login",
-          body
-        )
-      ).data;
+      const data = (await axios.post(`${baseUrl}/admin/login`, body)).data;
       return data;
     },
     enabled: false,
@@ -29,9 +25,7 @@ export const useGetAdmin = () => {
   const query = useQuery({
     queryKey: ["get-admin"],
     queryFn: async () => {
-      const { data } = await axios.get(
-        "https://sparkleworldstudio.vercel.app/api/getAdmin"
-      );
+      const { data } = await axios.get(`${baseUrl}/getAdmin`);
       return data;
     },
   });
@@ -45,10 +39,7 @@ export const useAddAdmin = () => {
     mutationKey: ["adding-admin"],
     mutationFn: async (body: object) => {
       toast.loading("Creating Admin", { id: "creating-admin" });
-      const data = await axios.post(
-        "https://sparkleworldstudio.vercel.app/api/admin/addadmin",
-        body
-      );
+      const data = await axios.post(`${baseUrl}/admin/addadmin`, body);
       return data;
     },
     onError: (error) => {
