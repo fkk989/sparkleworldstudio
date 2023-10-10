@@ -1,6 +1,9 @@
 import { prismaClient } from "@/client";
 import { NextResponse } from "next/server";
 
+// invalidating data for this route on each call
+export const revalidate = true;
+
 export async function GET() {
   try {
     const services = await prismaClient.services.findMany({
