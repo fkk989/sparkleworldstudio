@@ -6,6 +6,8 @@ import { ProjectCardProps } from "@/store";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
+export const revalidate = 10;
+
 // ://sparkleworldstudio.vercel.app
 export default function Projects() {
   const navigate = useRouter();
