@@ -7,3 +7,4 @@ export * from "./constructionRates";
 export * from "./projects";
 export * from "./contact";
 export * from "./dashboard";
+export * from "./service";

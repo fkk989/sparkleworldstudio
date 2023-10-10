@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
 
@@ -25,4 +25,18 @@ export const useAddService = () => {
     },
   });
   return { mutation, serviceData: mutation.data };
+};
+
+export const useGetServices = () => {
+  const query = useQuery({
+    queryKey: ["get-services"],
+    queryFn: async () => {
+      const { data } = await axios.get(
+        "http://localhost:3000/api/services/getservices"
+      );
+      return data;
+    },
+  });
+
+  return { ...query, data: query.data };
 };
