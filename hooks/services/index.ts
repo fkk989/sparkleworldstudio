@@ -22,7 +22,7 @@ export const useAddService = () => {
       // @ts-ignore
       const message = error.response.data.message;
 
-      toast.error(message, { id: "adding-service" });
+      toast.error(message ? message : "error", { id: "adding-service" });
     },
   });
   return { mutation, serviceData: mutation.data };

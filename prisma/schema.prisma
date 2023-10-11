@@ -42,8 +42,9 @@ model Services {
 }
 
 model Query {
-  id      String @id @default(uuid())
+  id      String  @id @default(uuid())
   email   String
+  name    String
   phone   Int
-  message String
+  message String?
 }

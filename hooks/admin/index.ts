@@ -45,7 +45,7 @@ export const useAddAdmin = () => {
     onError: (error) => {
       // @ts-ignore
       const message = error.response.data.message;
-      toast.error(message, { id: "creating-admin" });
+      toast.error(message ? message : "error", { id: "creating-admin" });
     },
     onSuccess: ({ data }) => {
       toast.success("successfully created", { id: "creating-admin" });
