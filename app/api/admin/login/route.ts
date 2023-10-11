@@ -9,8 +9,8 @@ import { z } from "zod";
 const JWT_SECRET = process.env.JWT_SECRET as string;
 
 const loginInput = z.object({
-  email: z.string(),
-  password: z.string(),
+  email: z.string().min(5),
+  password: z.string().min(5),
 });
 
 //function for get req this function will return a admin data

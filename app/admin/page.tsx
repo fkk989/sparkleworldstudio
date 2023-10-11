@@ -34,7 +34,7 @@ export default function Admin() {
     if (isError) {
       // @ts-ignore
       const message = error.response.data.message;
-      toast.error(message, {
+      toast.error(message ? message : "error", {
         id: "admin-login",
       });
     }

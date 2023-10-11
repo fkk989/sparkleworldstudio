@@ -23,7 +23,7 @@ export const useAddProject = () => {
       toast.loading("adding project", { id: "adding-project" });
 
       const { data } = await axios.post(
-        "https://sparkleworldstudio.vercel.app/api/projects/addprojects",
+        `${baseUrl}/projects/addprojects`,
         body
       );
       return data;
@@ -35,7 +35,7 @@ export const useAddProject = () => {
     onError: (error) => {
       // @ts-ignore
       const message = error.response.data.message;
-      toast.error(message, { id: "adding-project" });
+      toast.error(message ? message : "error", { id: "adding-project" });
     },
   });
   return { mutation, projectData: mutation.data };
