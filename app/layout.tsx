@@ -20,6 +20,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <meta charSet="UTF-8" />
+        <meta name="description" content="Best Construction Company" />
+        <meta
+          name="keywords"
+          content="building, construction engineering ,new construction ,tiny house builders, construction companies near me, construction site , construction materials ,construction worker ,construction management ,general contractor , building construction,remodeling ,constructeur maison, construction companies,builder ,contractor ,contractions ,building"
+        />
+        <meta name="author" content="Adil Nisar" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -30,7 +38,9 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Martian+Mono:wght@800&display=swap"
           rel="stylesheet"
         />
-        <title>Sparkle world studio</title>
+        <title>
+          Sparkle world studio | we construct your dream into reality
+        </title>
       </head>
       <Provider>
         <body className={inter.className}>
