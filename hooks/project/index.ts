@@ -72,6 +72,9 @@ export const useUploadToAws = () => {
         toast.success("upload successfull", { id: "uploading-image" });
       }
     },
+    onError: () => {
+      toast.error("error uploading image");
+    },
   });
   return { ...mutation, data: mutation.data };
 };
