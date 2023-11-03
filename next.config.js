@@ -6,6 +6,7 @@ const nextConfig = {
     domains: [
       "sparkel-world-studio.s3.ap-south-1.amazonaws.com",
       "easynirman.com",
+      "sparkle-world-studio-production.s3.ap-south-1.amazonaws.com",
     ],
   },
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {

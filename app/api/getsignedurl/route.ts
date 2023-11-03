@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
     const { imageType } = parsedInput.data;
 
     const putObjectCommand = new PutObjectCommand({
-      Bucket: "sparkel-world-studio",
+      Bucket: "sparkle-world-studio-production",
       Key: `uploads/${crypto.randomUUID()}.${imageType}`,
     });
 
