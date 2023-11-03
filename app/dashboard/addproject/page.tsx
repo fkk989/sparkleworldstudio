@@ -1,10 +1,9 @@
 "use client";
 import { Project } from "@/store";
-import { useEffect, useRef, useState } from "react";
-import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
 import { PhotoIcon } from "@heroicons/react/24/solid";
-import axios from "axios";
-import { useAddAdmin, useAddProject, useUploadToAws } from "@/hooks";
+import { useAddProject, useUploadToAws } from "@/hooks";
+import Image from "next/image";
 
 // imput style
 const inputStyle = `w-[100%] h-[50px] outline-none bg-transparent border-b border-[#23252d] placeholder:text-[#23252d] mobile:w-[90%]`;
@@ -52,14 +51,19 @@ export default function AddProject() {
   return (
     <div className="w-screen h-[150vh] mobile:h-screen flex justify-center items-center">
       {/* contact Form started*/}
-      <div className="w-screen h-[100vh] mobile:h-[80vh]  bg-[rgb(238,241,242)] flex flex-col justify-start items-center p-[5px] mobile:p-[30px] mobile:w-[700px] mobile:items-start mobile:gap-[50px]">
+      <div className="w-screen h-[100vh] mobile:h-[80vh]  bg-[rgb(238,241,242)] flex flex-col justify-start items-center p-[5px] mobile:p-[30px] mobile:w-[700px] mobile:items-start mobile:gap-[50px] overflow-scroll">
         <h1 className="capitalize text-black text-[25px] font-[999] bg-white w-[250px] h-[50px] flex justify-center items-center digonals-lines mobile:text-[42px] mobile:w-[350px] mobile:h-[100px]  ">
           add project
         </h1>
         <div
           typeof="contact"
-          className=" w-[340px] gap-[30px] flex flex-col items-start max-mobile:mt-[10px] mobile:w-[100%] "
+          className=" w-[340px] gap-[30px] flex flex-col items-start max-mobile:mt-[10px] mobile:w-[100%]"
         >
+          <div>
+            {imageUrl && (
+              <Image src={imageUrl} alt="" width={200} height={200} />
+            )}
+          </div>
           {/* title */}
           <input
             onChange={(e) => {

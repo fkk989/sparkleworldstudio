@@ -1,29 +1,26 @@
 "use client";
 
-import { ProjectCard } from "@/components";
+import { CardSkeleton, ProjectCard } from "@/components";
 import { useGetProjects } from "@/hooks/project";
 import { ProjectCardProps } from "@/store";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-
+import { Head } from "next/document";
+import Image from "next/image";
 // ://sparkleworldstudio.vercel.app
 export default function Projects() {
   const navigate = useRouter();
 
-  const { projectData, isSuccess } = useGetProjects();
-  useEffect(() => {
-    if (isSuccess) {
-      console.log(projectData.projects);
-    }
-  }, [isSuccess]);
+  const { projectData } = useGetProjects();
+
   return (
     <div className="flex flex-col">
       {/* top image container */}
+
       <div
-        className=" fixed top-0 w-screen h-[50vh] bg-cover bg-no-repeat bg-center bg-[rgba(0,0,0,0.7)] bg-blend-multiply "
+        className=" fixed top-0 w-screen h-[50vh] bg-cover bg-no-repeat bg-center bg-[rgba(0,0,0,0.5)] bg-blend-multiply "
         style={{
           backgroundImage:
-            "url('https://easynirman.com/assets/images/banner/ourprojectbanner.jpg')",
+            "url('https://sparkel-world-studio.s3.ap-south-1.amazonaws.com/projects.jpg')",
         }}
       ></div>
       {/* title */}
@@ -33,26 +30,55 @@ export default function Projects() {
         </h1>
       </div>
       {/* projects card container */}
-      <div className=" grid grid-cols-12 gap-[20px] justify-items-center  mt-[5vh] bg-white z-[5] pt-[30px]">
+      <div className=" w-screen grid grid-cols-12 gap-[20px]  justify-items-center mt-[5vh] bg-white z-[5] pt-[30px] pb-[50px]">
         {/* project card */}
-        {projectData &&
+        {projectData?.projects ? (
           projectData.projects.map((projectData: ProjectCardProps) => {
             return (
               <div
                 key={projectData.id}
-                className=" col-span-12 mobile:col-span-3"
-                onClick={() => {
-                  navigate.push(`/projects/${projectData.id}`);
-                }}
+                className=" col-span-12 mobile:col-span-6 tab:col-span-4 pc:col-span-3 "
               >
                 <ProjectCard
+                  id={projectData.id}
                   imageUrl={`${projectData.imageUrl}`}
                   title={`${projectData.title}`}
                   info={`${projectData.info}`}
+                  onClick={() => {
+                    navigate.push(`/projects/${projectData.id}`);
+                  }}
                 />
               </div>
             );
-          })}
+          })
+        ) : (
+          <>
+            <div
+              suppressHydrationWarning
+              className=" col-span-12 mobile:col-span-6 tab:col-span-4 pc:col-span-3"
+            >
+              <CardSkeleton key={"1"} />
+            </div>
+            <div
+              suppressHydrationWarning
+              className=" col-span-12 mobile:col-span-6 tab:col-span-4 pc:col-span-3"
+            >
+              <CardSkeleton key={"2"} />
+            </div>
+            <div
+              suppressHydrationWarning
+              className=" col-span-12 mobile:col-span-6 tab:col-span-4 pc:col-span-3"
+            >
+              <CardSkeleton key={"3"} />
+            </div>
+            <div
+              suppressHydrationWarning
+              className=" col-span-12 mobile:col-span-6 tab:col-span-4 pc:col-span-3"
+            >
+              <CardSkeleton key={"3"} />
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

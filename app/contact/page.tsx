@@ -1,4 +1,4 @@
-import { ContactForm, Footer, InfoCard } from "@/components";
+import { ContactForm, InfoCard } from "@/components";
 // input style
 
 export default function Contact() {
@@ -6,10 +6,10 @@ export default function Contact() {
     <div className="flex flex-col">
       {/* top image container */}
       <div
-        className="  fixed top-0 w-screen h-[50vh] bg-cover bg-no-repeat bg-center bg-[rgba(0,0,0,0.7)] bg-blend-multiply"
+        className="  fixed top-0 w-screen h-[50vh] bg-cover bg-no-repeat bg-center bg-[rgba(0,0,0,0.3)] bg-blend-multiply"
         style={{
           backgroundImage:
-            "url('https://easynirman.com/assets/images/banner/contactusbanner.jpg')",
+            "url('https://sparkel-world-studio.s3.ap-south-1.amazonaws.com/contact.jpg')",
         }}
       ></div>
       {/* title */}
@@ -26,10 +26,6 @@ export default function Contact() {
             <ContactForm />
             <InfoCard />
           </div>
-        </div>
-
-        <div className="mt-[50px]">
-          <Footer />
         </div>
       </div>
     </div>

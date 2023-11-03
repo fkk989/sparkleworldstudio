@@ -59,6 +59,10 @@ export async function POST(req: NextRequest) {
     });
 
     cookie.set("sparkle-admin-token", token);
+
+    // making passrod null
+    admin.password = "";
+
     return NextResponse.json(
       {
         success: true,

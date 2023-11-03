@@ -48,7 +48,7 @@ export default function AddService() {
         </h1>
         <div
           typeof="contact"
-          className=" w-[340px] gap-[30px] flex flex-col items-center max-mobile:mt-[20px] mobile:w-[100%] mobile:items-start"
+          className=" w-[340px] gap-[30px] flex flex-col i max-mobile:mt-[20px] mobile:w-[100%] "
         >
           {/* title */}
           <input

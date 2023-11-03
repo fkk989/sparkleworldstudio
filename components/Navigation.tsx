@@ -6,6 +6,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { closeNavbar, headerAnimation, openNavbar } from "@/store";
 import { DropDown } from "./constructionRates";
+import { DesignIdeaDropDown } from "./designIdea";
 import { isAdmin } from "@/store";
 import { useRecoilValue } from "recoil";
 import { DashboardDropDown } from "./dashboard";
@@ -27,7 +28,7 @@ export const Navigation = () => {
   const navCloser = useRef<HTMLDivElement>(null);
   const links = useRef<HTMLElement[]>([]);
   const logoDov = useRef<HTMLDivElement>(null);
-  const constructionLink = useRef<HTMLLIElement>(null);
+  const dropDownd = useRef<HTMLLIElement>(null);
   const adminLink = useRef<HTMLLIElement>(null);
   // pushing refrences into link.current array
   function puhsToLinksRef(element: HTMLLIElement) {
@@ -63,13 +64,21 @@ export const Navigation = () => {
       return () => ctx.revert(); // <-- CLEANUP!
     });
 
+    document.addEventListener("scroll", (e) => {
+      if (window.scrollY < 100) {
+        header.current!.style.backgroundColor = "rgba(0,0,0,0.65)";
+      } else {
+        header.current!.style.backgroundColor = "#23252d";
+      }
+    });
+
     // header animation
     let ctx = gsap.context(() => {
       headerAnimation(
         header.current!,
         links.current!,
         logoDov.current!,
-        constructionLink.current!,
+        dropDownd.current!,
         adminLink.current!
       );
     });
@@ -111,9 +120,9 @@ export const Navigation = () => {
       </div>
       <nav
         ref={navbar}
-        className="max-mobile:fixed  flex flex-col mobile:flex-row  gap-[50px] mobile:gap-[100px]   mobile:justify-between items-center  top-0 right-0 w-[50vw] mobile:w-[85%]  h-[100vh] mobile:h-[80px]  bg-[#23252d] mobile:bg-transparent translate-x-[100%] mobile:translate-x-0"
+        className="max-mobile:fixed  flex flex-col mobile:flex-row  gap-[50px] mobile:gap-[100px]   mobile:justify-between items-center  top-0 right-0 w-[50vw] mobile:w-[100vw]  h-[100vh] mobile:h-[80px]  bg-[#23252d] mobile:bg-transparent translate-x-[100%] mobile:translate-x-0"
       >
-        <ul className="flex flex-col mobile:flex-row mobile:justify-center items-start mobile:items-center mobile:h-[80px] text-white gap-[20px] mobile:gap-[40px] max-mobile:pt-[100px] max-mobile:pl-[10px] mobile:w-[90%]">
+        <ul className="flex flex-col mobile:flex-row mobile:justify-center items-start mobile:items-center mobile:h-[80px] text-white gap-[20px] mobile:gap-[40px] max-mobile:pt-[100px] max-mobile:pl-[10px] mobile:w-[100vw]">
           {/* modal closer */}
           <div
             ref={navCloser}
@@ -133,6 +142,30 @@ export const Navigation = () => {
             home
           </li>
           <li
+            ref={dropDownd}
+            className={`${className} ${
+              pathName === "/idea" || pathName === `/idea/${params.id}`
+                ? "text-gray-400"
+                : "text-white"
+            }`}
+            // onClick={() => {
+            //   navigation.push("/idea");
+            // }}
+          >
+            <DesignIdeaDropDown navbar={navbar} />
+          </li>
+          <li
+            ref={puhsToLinksRef}
+            className={`${className} ${
+              pathName === "/process" ? "text-gray-400" : "text-white"
+            }`}
+            onClick={() => {
+              navigation.push("/process");
+            }}
+          >
+            process
+          </li>
+          <li
             ref={puhsToLinksRef}
             className={`${className} ${
               pathName === `/projects` || pathName === `/projects/${params.id}`
@@ -145,7 +178,8 @@ export const Navigation = () => {
           >
             projects
           </li>
-          <li
+          {/* comment will add if needed in the future */}
+          {/* <li
             ref={constructionLink}
             className={`${className} ${
               pathName === `/rates` || pathName === `/rates/${params.id}`
@@ -154,7 +188,7 @@ export const Navigation = () => {
             }`}
           >
             <DropDown navbar={navbar} />
-          </li>
+          </li> */}
           <li
             ref={puhsToLinksRef}
             className={`${className} ${
@@ -166,7 +200,8 @@ export const Navigation = () => {
           >
             services
           </li>
-          <li
+          {/* comment will add if needed in the future */}
+          {/* <li
             ref={puhsToLinksRef}
             className={`${className} ${
               pathName === "/blog" ? "text-gray-400" : "text-white"
@@ -176,7 +211,7 @@ export const Navigation = () => {
             }}
           >
             blog
-          </li>
+          </li> */}
           <li
             ref={puhsToLinksRef}
             className={`${className} ${

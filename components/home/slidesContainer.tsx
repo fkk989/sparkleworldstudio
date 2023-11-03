@@ -2,11 +2,8 @@
 import { useEffect, useState } from "react";
 import { SlideOne } from "./slideOne";
 import { SlideTwo } from "./slideTwo";
-import { useRecoilValue } from "recoil";
-import { loadCount } from "@/store";
 
 export const SlidesContainer = (): JSX.Element => {
-  const slidesNumbers = ["one", "two"];
   const [slide, setSlide] = useState("one");
 
   useEffect(() => {

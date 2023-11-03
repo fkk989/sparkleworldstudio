@@ -5,7 +5,7 @@ export function headerAnimation(
   header: HTMLDivElement,
   links: HTMLElement[],
   logoDiv: HTMLDivElement,
-  construction: HTMLLIElement,
+  dropDown: HTMLLIElement,
   adminLink: HTMLLIElement
 ) {
   if (window.innerWidth > 500) {
@@ -25,7 +25,7 @@ export function headerAnimation(
         opacity: 0,
       })
       .from(
-        construction,
+        dropDown,
         {
           opacity: 0,
         },

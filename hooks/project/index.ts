@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { baseUrl } from "@/store";
+import { Project, ProjectCardProps, baseUrl } from "@/store";
 export const useGetProjects = () => {
   const query = useQuery({
     queryKey: ["get-projects"],
@@ -11,6 +11,38 @@ export const useGetProjects = () => {
       return data;
     },
   });
+  return { ...query, projectData: query.data };
+};
+
+// get project by the id for dynamic page
+export const useGetProjectById = (body: object) => {
+  const query = useQuery({
+    queryKey: ["get-project-by-id"],
+    queryFn: async () => {
+      const data = (
+        await axios.post(`${baseUrl}/projects/getprojectbyid`, body)
+      ).data;
+
+      return data as { project: ProjectCardProps };
+    },
+  });
+
+  return { ...query, projectData: query.data };
+};
+// get project by the id for fetching in update project
+export const useGetProjectByIdDisabled = (body: object) => {
+  const query = useQuery({
+    queryKey: ["get-project-by-id"],
+    queryFn: async () => {
+      const data = (
+        await axios.post(`${baseUrl}/projects/getprojectbyid`, body)
+      ).data;
+
+      return data as { project: ProjectCardProps };
+    },
+    enabled: false,
+  });
+
   return { ...query, projectData: query.data };
 };
 
@@ -77,4 +109,51 @@ export const useUploadToAws = () => {
     },
   });
   return { ...mutation, data: mutation.data };
+};
+
+export const useDeleteProject = () => {
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationKey: ["deleted-project"],
+    mutationFn: async (id: string) => {
+      toast.loading("deleting project", { id: "deleting-project" });
+      const data = (
+        await axios.delete(`${baseUrl}/projects/deleteproject`, {
+          data: { id },
+        })
+      ).data;
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("deleted successfully", { id: "deleting-project" });
+      queryClient.invalidateQueries({ queryKey: ["get-projects"] });
+    },
+    onError: () => {
+      toast.error("Error", { id: "deleting-project" });
+    },
+  });
+  return { ...mutation, data: mutation.data };
+};
+
+export const useUpdateProject = () => {
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationKey: ["update-project"],
+    mutationFn: async (body: Project) => {
+      toast.loading("updating", { id: "updating-data" });
+      const data = (await axios.put(`${baseUrl}/projects/updateproject`, body))
+        .data;
+
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("successfull", { id: "updating-data" });
+      queryClient.invalidateQueries({ queryKey: ["get-projects"] });
+    },
+    onError: () => {
+      toast.error("error", { id: "updating-data" });
+    },
+  });
+
+  return { mutation };
 };

@@ -9,7 +9,7 @@ const linkStyle = `w-[30px] h-[30px] rounded-full bg-white hover:bg-slate-500 fl
 export const Footer = () => {
   return (
     <footer>
-      <div className="w-screen h-[70vh] mobile:h-[30vh] bg-[#23252d] flex flex-col mobile:flex-row justify-start mobile:justify-center  item-start  mobile:items-center pl-[10px] pt-[10px] gap-[30px] mobile:gap-[200px]">
+      <div className="w-screen h-[70vh] mobile:h-[30vh] bg-[#23252d] flex flex-col mobile:flex-row justify-start mobile:justify-center  item-start  mobile:items-center pl-[10px] pt-[10px] gap-[30px] mobile:gap-[200px] z-[5]">
         {/* socila links */}
         <div>
           <Image

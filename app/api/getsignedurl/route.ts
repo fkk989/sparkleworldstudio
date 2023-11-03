@@ -31,19 +31,6 @@ export async function POST(req: NextRequest) {
     const reqBody = await req.json();
     const cookie = cookies();
 
-    const parsedInput = input.safeParse(reqBody);
-
-    if (!parsedInput.success) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: "Invalid input",
-          url: null,
-        },
-        { status: 400 }
-      );
-    }
-
     const token = cookie.get("sparkle-admin-token");
     const verifiedToken = token && (await JWT.verify(token.value, JWT_SECRET));
 
@@ -52,6 +39,19 @@ export async function POST(req: NextRequest) {
         {
           success: false,
           message: "admin token not found",
+          url: null,
+        },
+        { status: 400 }
+      );
+    }
+
+    const parsedInput = input.safeParse(reqBody);
+
+    if (!parsedInput.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Invalid input",
           url: null,
         },
         { status: 400 }

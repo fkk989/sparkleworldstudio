@@ -9,8 +9,8 @@ const config: Config = {
   theme: {
     screens: {
       mobile: "500px",
-      tab: "100px",
-      pc: "1300px",
+      tab: "1200px",
+      pc: "1600px",
     },
     extend: {},
   },

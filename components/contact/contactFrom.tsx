@@ -1,7 +1,26 @@
-// imput style
+"use client";
+
+import { useSendQuery } from "@/hooks";
+import { useState } from "react";
+
+// input style
 const inputStyle = `w-[100%] h-[50px] outline-none bg-transparent border-b border-[#23252d] placeholder:text-[#23252d] mobile:w-[90%]`;
 
 export const ContactForm = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
+
+  const queryBody = {
+    name,
+    email,
+    phone,
+    message,
+  };
+
+  const { mutation } = useSendQuery();
+
   return (
     <div>
       {/* contact Form started*/}
@@ -13,22 +32,51 @@ export const ContactForm = () => {
           typeof="contact"
           className=" w-[340px] gap-[30px] flex flex-col items-center max-mobile:mt-[20px] mobile:w-[100%] mobile:items-start"
         >
-          <input type="text" placeholder="Name" className={`${inputStyle}`} />
-          <input type="text" placeholder="Email" className={`${inputStyle}`} />
           <input
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+            type="text"
+            placeholder="Name"
+            className={`${inputStyle}`}
+            value={name}
+          />
+          <input
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            type="text"
+            placeholder="Email"
+            className={`${inputStyle}`}
+            value={email}
+          />
+          <input
+            onChange={(e) => {
+              setPhone(e.target.value);
+            }}
             type="number"
             placeholder="Phone"
             className={`${inputStyle}`}
+            value={phone}
           />
           <input
+            onChange={(e) => {
+              setMessage(e.target.value);
+            }}
             type="text"
             placeholder="Message"
             className={`${inputStyle}`}
+            value={message}
           />
 
           {/* submit button */}
           <div className="w-[100%] flex justify-end items-center mobile:w-[90%]">
-            <button className="w-[80px] h-[40px] bg-[#d7b39a] text-[11px] font-[600] tracking-[3px] uppercase">
+            <button
+              onClick={() => {
+                mutation.mutate(queryBody);
+              }}
+              className="w-[80px] h-[40px] bg-[#d7b39a] text-[11px] font-[600] tracking-[3px] uppercase"
+            >
               Submit
             </button>
           </div>

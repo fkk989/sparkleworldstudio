@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Navigation, Provider, Loader } from "@/components";
+import { Navigation, Provider, Loader, Footer, LogOutBtn } from "@/components";
 import { Toaster } from "react-hot-toast";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
@@ -29,6 +29,7 @@ export default function RootLayout({
         <meta name="author" content="Adil Nisar" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="icon" type="image/x-icon" href="/sws.ico"></link>
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
@@ -46,11 +47,17 @@ export default function RootLayout({
         <body className={inter.className}>
           <header>
             <Navigation />
+            <div className="fixed top-[40px] right-[10px]"></div>
           </header>
-          <main>
-            <Loader />
-            {children}
-          </main>
+          <div className="flex flex-col ">
+            <main>
+              <Loader />
+              {children}
+            </main>
+            <div className="z-[5]  ">
+              <Footer />
+            </div>
+          </div>
           <Toaster position="top-right" reverseOrder={false} />
           <ReactQueryDevtools />
         </body>

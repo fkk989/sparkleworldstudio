@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { baseUrl } from "@/store";
+import { Services } from "@prisma/client";
 
 export const useAddService = () => {
   const mutation = useMutation({
@@ -38,4 +39,19 @@ export const useGetServices = () => {
   });
 
   return { ...query, data: query.data };
+};
+// get project by the id for dynamic page
+export const useGetServiceById = (id: string) => {
+  const query = useQuery({
+    queryKey: ["get-project-by-id"],
+    queryFn: async () => {
+      const data = (
+        await axios.post(`${baseUrl}/services/getservicebyid`, { id })
+      ).data;
+
+      return data as { service: Services };
+    },
+  });
+
+  return { ...query, serviceData: query.data };
 };

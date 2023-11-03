@@ -8,8 +8,8 @@ import { z } from "zod";
 const JWT_SECRET = process.env.JWT_SECRET as string;
 
 const projectInput = z.object({
-  title: z.string(),
-  clientName: z.string(),
+  title: z.string().min(5),
+  clientName: z.string().min(5),
   info: z.string().optional(),
   landArea: z.string().optional(),
   budget: z.string().optional(),
@@ -18,10 +18,10 @@ const projectInput = z.object({
 });
 
 export async function POST(req: NextRequest) {
-  const reqBody = await req.json();
-  const cookie = cookies();
-
   try {
+    const reqBody = await req.json();
+    const cookie = cookies();
+
     const token = cookie.get("sparkle-admin-token");
     const verifiedToken = token && (await JWT.verify(token.value, JWT_SECRET));
 
@@ -53,17 +53,6 @@ export async function POST(req: NextRequest) {
     // fetching data from parsedInput
     const { title, clientName, info, landArea, budget, architect, imageUrl } =
       parsedInput.data;
-
-    if (title.length === 0 || clientName.length === 0) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: "title and client name are important!",
-          projectData: null,
-        },
-        { status: 422 }
-      );
-    }
 
     const project = await prismaClient.project.create({
       data: {

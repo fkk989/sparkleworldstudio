@@ -1,10 +1,10 @@
-import { HomePageContent, SlidesContainer } from "@/components";
+import { HomePageContent, SlidesContainer, VoyageSlider } from "@/components";
 
 export default function Home() {
   return (
     <div className="w-screen">
       <div>
-        <SlidesContainer />
+        <VoyageSlider />
       </div>
       <div className="">
         <HomePageContent />

@@ -42,9 +42,33 @@ model Services {
 }
 
 model Query {
-  id      String  @id @default(uuid())
-  email   String
-  name    String
-  phone   Int
-  message String?
+  id        String   @id @default(uuid())
+  email     String
+  name      String
+  phone     String
+  message   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DecorMenu {
+  id        String   @id @default(uuid())
+  title     String
+  type      String   @unique
+  imageUrl  String
+  info      String
+  ideas     Idea[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Idea {
+  id        String    @id @default(uuid())
+  title     String
+  imageUrl  String
+  info      String
+  decor     DecorMenu @relation(fields: [decorId], references: [id])
+  decorId   String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }

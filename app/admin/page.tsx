@@ -51,7 +51,7 @@ export default function Admin() {
           className=" w-[340px] gap-[30px] flex flex-col items-center max-mobile:mt-[20px] mobile:w-[100%] mobile:items-start"
         >
           <input
-            type="text"
+            type="email"
             placeholder="email"
             className={`${inputStyle}`}
             onChange={(e) => {
@@ -59,7 +59,7 @@ export default function Admin() {
             }}
           />
           <input
-            type="text"
+            type="password"
             placeholder="password"
             className={`${inputStyle}`}
             onChange={(e) => {
