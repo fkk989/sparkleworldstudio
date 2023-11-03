@@ -20,7 +20,7 @@ export default function DesignIdea() {
         className=" fixed top-0 w-screen h-[50vh] bg-cover bg-no-repeat bg-center bg-[rgba(0,0,0,0.7)] bg-blend-multiply "
         style={{
           backgroundImage:
-            "url('https://sparkle-world-studio-production.s3.ap-south-1.amazonaws.com/idea2.jpg')",
+            "url('https://sparkle-world-studio-production.s3.ap-south-1.amazonaws.com/uploads/916617c6-1303-40b4-9982-b7e9995bb5b9.jpeg')",
         }}
       ></div>
       {/* title */}
@@ -31,6 +31,13 @@ export default function DesignIdea() {
       </div>
       {/* projects card container */}
       <div className=" grid grid-cols-12 gap-[20px] justify-items-center  mt-[5vh] bg-white z-[5] pt-[30px] pb-[50px]">
+        {decorData?.length === 0 && (
+          <div className="col-span-12 h-screen flex justify-center items-start">
+            <div className="text-[40px] uppercase font-bold">
+              No design right now
+            </div>
+          </div>
+        )}
         {/* project card */}
         {decorData ? (
           decorData.map((decorData) => {

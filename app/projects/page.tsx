@@ -20,7 +20,7 @@ export default function Projects() {
         className=" fixed top-0 w-screen h-[50vh] bg-cover bg-no-repeat bg-center bg-[rgba(0,0,0,0.5)] bg-blend-multiply "
         style={{
           backgroundImage:
-            "url('https://sparkle-world-studio-production.s3.ap-south-1.amazonaws.com/projects.jpg')",
+            "url('https://sparkle-world-studio-production.s3.ap-south-1.amazonaws.com/pexels-binyamin-mellish-1396132.jpg')",
         }}
       ></div>
       {/* title */}
@@ -31,6 +31,13 @@ export default function Projects() {
       </div>
       {/* projects card container */}
       <div className=" w-screen grid grid-cols-12 gap-[20px]  justify-items-center mt-[5vh] bg-white z-[5] pt-[30px] pb-[50px]">
+        {projectData?.projects?.length === 0 && (
+          <div className="col-span-12 h-screen flex justify-center items-start">
+            <div className="text-[40px] uppercase font-bold">
+              No projects right now
+            </div>
+          </div>
+        )}
         {/* project card */}
         {projectData?.projects ? (
           projectData.projects.map((projectData: ProjectCardProps) => {

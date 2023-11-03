@@ -23,7 +23,7 @@ export default function ProjectInfo({ params }: { params: { id: string } }) {
               alt=""
               width={500}
               height={600}
-              className="w-[100%] h-[100%]  tab:w-[60%] tab:h-[80%]"
+              className="w-[100%] h-[100%]"
             />
           )}
         </div>
