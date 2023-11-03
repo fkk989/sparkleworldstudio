@@ -20,7 +20,7 @@ export default function DesignIdea() {
         className=" fixed top-0 w-screen h-[50vh] bg-cover bg-no-repeat bg-center bg-[rgba(0,0,0,0.7)] bg-blend-multiply "
         style={{
           backgroundImage:
-            "url('https://sparkel-world-studio.s3.ap-south-1.amazonaws.com/idea2.jpg')",
+            "url('https://sparkle-world-studio-production.s3.ap-south-1.amazonaws.com/idea2.jpg')",
         }}
       ></div>
       {/* title */}

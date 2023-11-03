@@ -15,7 +15,7 @@ export default function Services() {
         className=" fixed top-0 w-screen h-[50vh] bg-cover bg-no-repeat bg-center bg-[rgba(0,0,0,0.3)] bg-blend-multiply "
         style={{
           backgroundImage:
-            "url('https://sparkel-world-studio.s3.ap-south-1.amazonaws.com/services.jpg')",
+            "url('https://sparkle-world-studio-production.s3.ap-south-1.amazonaws.com/services.jpg')",
         }}
       ></div>
       {/* title */}

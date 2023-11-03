@@ -94,7 +94,7 @@ export default function Process() {
         className=" fixed top-0 w-screen h-[50vh] bg-cover bg-no-repeat bg-center bg-[rgba(0,0,0,0.3)] bg-blend-multiply "
         style={{
           backgroundImage:
-            "url('https://sparkel-world-studio.s3.ap-south-1.amazonaws.com/process2.jpg')",
+            "url('https://sparkle-world-studio-production.s3.ap-south-1.amazonaws.com/process2.jpg')",
         }}
       ></div>
       {/* title */}
@@ -137,7 +137,7 @@ export default function Process() {
         <div className=" col-span-12 tab:col-span-5 flex justify-center items-start">
           <Image
             src={
-              "https://sparkel-world-studio.s3.ap-south-1.amazonaws.com/processimg.png"
+              "https://sparkle-world-studio-production.s3.ap-south-1.amazonaws.com/processimg.png"
             }
             alt=""
             width={500}

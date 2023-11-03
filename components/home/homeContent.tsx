@@ -13,11 +13,13 @@ export const HomePageContent = () => {
       <div className="max-mobile:mt-[50px]  flex flex-col mobile:flex-row mobile:w-screen mobile:h-[700px]  justify-center items-center mobile:gap-[50px] bg-[#eef1f2]">
         <div>
           <Image
-            src={"https://easynirman.com/assets/images/banner/floorinhome.jpg"}
+            src={
+              "https://sparkle-world-studio-production.s3.ap-south-1.amazonaws.com/inovative.jpg"
+            }
             alt="img"
-            width={350}
+            width={400}
             height={400}
-            className="w-[350px] mobile:w-[440px] h-[400px] mobile:h-[500px] "
+            className="w-[350px] mobile:w-[440px] h-[400px] mobile:h-[400px] "
           />
         </div>
         {/* content */}
@@ -57,7 +59,9 @@ export const HomePageContent = () => {
           {/* square box */}
           <div className="hidden mobile:block absolute w-[570px] h-[350px] right-0 bottom-0 border-[20px] border-[#dfdfdf] "></div>
           <Image
-            src={"https://easynirman.com/assets/images/contactbanner.jpg"}
+            src={
+              "https://sparkle-world-studio-production.s3.ap-south-1.amazonaws.com/management.jpg"
+            }
             alt="img"
             width={350}
             height={400}
