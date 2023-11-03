@@ -4,7 +4,6 @@ import { prismaClient } from "@/client";
 export async function POST(req: NextRequest) {
   try {
     const { id } = (await req.json()) as { id: string };
-    console.log(id);
     const designIdea = await prismaClient.idea.findUnique({
       where: { id },
     });

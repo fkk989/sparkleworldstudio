@@ -14,7 +14,7 @@ export const HomePageContent = () => {
         <div>
           <Image
             src={
-              "https://sparkle-world-studio-production.s3.ap-south-1.amazonaws.com/inovative.jpg"
+              "https://sparkle-world-studio-production.s3.ap-south-1.amazonaws.com/pexels-tyler-hendy-52062.jpg"
             }
             alt="img"
             width={400}

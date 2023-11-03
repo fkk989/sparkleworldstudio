@@ -18,14 +18,14 @@ export default function DesignInfo({
     <div className=" w-screen h-screen grid grid-cols-12 ">
       {/* image div */}
       <div className=" col-span-12 tab:col-span-8   flex justify-center items-center mt-[80px] tab:mt-[50px]">
-        <div className="w-[90%] h-[85%] bg-[#F4F3F4] flex justify-center items-center">
+        <div className="w-[90%] h-[85%] bg-[#F4F3F4] flex justify-center items-center ideaImgShadow">
           {designIdea && (
             <Image
               src={designIdea.imageUrl}
               alt=""
               width={500}
               height={600}
-              className="w-[100%] h-[100%]  tab:w-[60%] tab:h-[80%]"
+              className="w-[100%] h-[100%]"
             />
           )}
         </div>

@@ -24,8 +24,16 @@ export default function Services() {
           our services
         </h1>
       </div>
+
       {/* Service card container */}
       <div className=" w-screen grid grid-cols-12 gap-[20px]  justify-items-center mt-[5vh] bg-white z-[5] pt-[30px] pb-[50px]">
+        {data?.services.length === 0 && (
+          <div className="col-span-12 h-screen flex justify-center items-start">
+            <div className="text-[40px] uppercase font-bold">
+              No services right now
+            </div>
+          </div>
+        )}
         {data ? (
           data.services.map((serviceData: Services) => {
             return (
