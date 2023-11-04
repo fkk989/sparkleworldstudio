@@ -51,7 +51,7 @@ export default function RootLayout({
           </header>
           <div className="flex flex-col ">
             <main>
-              <Loader />
+              {/* <Loader /> */}
               {children}
             </main>
             <div className="z-[5]  ">
