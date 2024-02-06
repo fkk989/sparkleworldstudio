@@ -1,0 +1,226 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  background: #eaeaea;
+}
+
+.slide-container {
+  width: 100vw;
+  height: 100vh;
+  animation: fadeInBg 2s ease-out 1 forwards;
+}
+
+.slide-container .slide .item {
+  width: 50px;
+  height: 100px;
+  position: absolute;
+  top: 85%;
+  transform: translate(0, -50%);
+  border-radius: 20px;
+  background-position: 50% 50%;
+  background-size: cover;
+  display: inline-block;
+  transition: 0.5s;
+}
+.slide .item:nth-child(1),
+.slide .item:nth-child(2) {
+  top: 0;
+  left: 0;
+  transform: translate(0, 0);
+  border-radius: 0;
+  width: 100%;
+  height: 100%;
+  animation: fadeInBg 2s ease-out 1 forwards;
+}
+
+.slide .item:nth-child(3) {
+  left: calc(50% - 100px);
+  opacity: 1;
+  animation: fadeInBg 2s ease-out 1 forwards;
+}
+.slide .item:nth-child(4) {
+  left: calc(50% - 25px);
+  opacity: 1;
+  animation: fadeInBg 2s ease-out 1 forwards;
+}
+.slide .item:nth-child(5) {
+  left: calc(50% + 50px);
+  opacity: 1;
+  animation: fadeInBg 2s ease-out 1 forwards;
+}
+
+/* here n = 0, 1, 2, 3,... */
+.slide .item:nth-child(n + 6) {
+  left: calc(50% + 100px);
+  opacity: 0;
+}
+
+.item .content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  color: #23252d;
+  transform: translate(-50%, -50%);
+  font-family: system-ui;
+  display: none;
+}
+
+.slide .item:nth-child(2) .content {
+  display: block;
+}
+
+.content .name {
+  font-size: 50px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  opacity: 0;
+  animation: animate 1s ease-in-out 1 forwards;
+}
+
+.content .des {
+  font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: animate 1s ease-in-out 0.3s 1 forwards;
+}
+
+.content button {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 100px;
+  opacity: 0;
+  animation: animate 1s ease-in-out 0.6s 1 forwards;
+}
+
+@keyframes animate {
+  from {
+    opacity: 0;
+    transform: translate(0, 100px);
+    filter: blur(33px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0);
+    filter: blur(0);
+  }
+}
+@keyframes fadeInBg {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.button {
+  position: absolute;
+  bottom: 20px;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button button {
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 40px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  margin: 0 5px;
+  border: 1px solid #fff;
+  transition: 0.3s;
+}
+
+.button button:hover {
+  background: #ababab;
+  color: #fff;
+}
+
+@media screen and (max-width: 500px) {
+  .slide-container .slide .item {
+    top: 82%;
+  }
+  .slide .item:nth-child(1),
+  .slide .item:nth-child(2) {
+    top: 0;
+    left: 0;
+    transform: translate(0, 0);
+    border-radius: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.digonals-lines {
+  background-color: #ffffff;
+  background-size: 10px 10px;
+  background-image: repeating-linear-gradient(
+    45deg,
+    #dbdcf1 0,
+    #dbdcf1 1px,
+    #ffffff 0,
+    #ffffff 50%
+  );
+}
+.textured-bg {
+  background-color: #ffffff;
+  opacity: 1;
+  background: radial-gradient(
+      circle,
+      transparent 20%,
+      #ffffff 20%,
+      #ffffff 80%,
+      transparent 80%,
+      transparent
+    ),
+    radial-gradient(
+        circle,
+        transparent 20%,
+        #ffffff 20%,
+        #ffffff 80%,
+        transparent 80%,
+        transparent
+      )
+      25px 25px,
+    linear-gradient(#e5e6f1 2px, transparent 2px) 0 -1px,
+    linear-gradient(90deg, #e5e6f1 2px, #ffffff 2px) -1px 0;
+  background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;
+}
+
+.cardShadow {
+  box-shadow: 1px 2px 30px 4px rgba(120, 120, 120, 0.7);
+  -webkit-box-shadow: 1px 2px 30px 4px rgba(120, 120, 120, 0.7);
+  -moz-box-shadow: 1px 2px 30px 4px rgba(120, 120, 120, 0.7);
+}
+
+.ideaImgShadow {
+  box-shadow: -1px 2px 32px -4px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: -1px 2px 32px -4px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -1px 2px 32px -4px rgba(0, 0, 0, 0.75);
+}
