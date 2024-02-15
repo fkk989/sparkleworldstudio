@@ -3,4 +3,7 @@ export * from "./helpers";
 export * from "./interfaces";
 
 // BASE url for backend api
-export const baseUrl = "https://www.sparkleworldstudio.com/api";
+// production
+// export const baseUrl = "https://www.sparkleworldstudio.com/api";
+// dev
+export const baseUrl = "http://localhost:3000/api";
