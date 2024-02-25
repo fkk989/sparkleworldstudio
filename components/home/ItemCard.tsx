@@ -13,18 +13,18 @@ export const ItemCard: React.FC<Partial<DecorMenu>> = (props) => {
         backgroundImage: `url("${props.imageUrl}")`,
       }}
     >
-      <div className="content ">
+      <div className="content">
         <div className="max-mobile:w-[90vw] name bg-white bg-opacity-[0.2] ">
           {props.title}
         </div>
-        <div className="max-mobile:w-[90vw] des bg-white bg-opacity-[0.2]">
+        {/* <div className="max-mobile:w-[90vw] des bg-white bg-opacity-[0.2]">
           {props.info}
-        </div>
+        </div> */}
         <button
           onClick={() => {
             navigate.push(`/idea/${props.type}`);
           }}
-          className="text-white"
+          className="text-white mt-[30px]"
         >
           See More
         </button>
